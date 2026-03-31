@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"os"
 
 	"tj-beads/internal/db"
+	"tj-beads/internal/web"
 )
 
 func main() {
@@ -32,7 +32,8 @@ func main() {
 		fmt.Println("Created test user")
 	}
 
-	fmt.Println("tj-beads application")
-	fmt.Println("Database connected successfully")
-	os.Exit(0)
+	// Start web server
+	server := web.NewServer(database, 8080)
+	fmt.Println("Server starting on http://localhost:8080")
+	log.Fatal(server.ListenAndServe())
 }
